@@ -9,7 +9,7 @@ import { Footer } from "./components/Footer";
 
 
 function App() {
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const [colaborators, setColaborators] = useState([
     {
       id: uuid(),
@@ -17,6 +17,7 @@ function App() {
       photo: "https://github.com/harlandlohora.png",
       name: "Harland Lohora",
       area: "Instructor",
+      fav: true,
     },
     {
       id: uuid(),
@@ -24,6 +25,8 @@ function App() {
       photo: "https://github.com/genesysrm.png",
       name: "Genesys Rondon",
       area: "Desarrolladora de software e instructora",
+      fav:false,
+
     },
     {
       id: uuid(),
@@ -31,6 +34,7 @@ function App() {
       photo: "https://github.com/JeanmarieAluraLatam.png",
       name: "Jeanmarie Quijada",
       area: "Instructora en Alura Latam",
+      fav:false,
     },
     {
       id: uuid(),
@@ -38,6 +42,7 @@ function App() {
       photo: "https://github.com/christianpva.png",
       name: "Christian Velasco",
       area: "Head de Alura e Instructor",
+      fav:false,
     },
     {
       id: uuid(),
@@ -45,6 +50,7 @@ function App() {
       photo: "https://github.com/JoseDarioGonzalezCha.png",
       name: "Jose Gonzalez",
       area: "Dev FullStack",
+      fav:false,
     },
   ]);
   const [teams, setTeams] = useState([
@@ -103,7 +109,6 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    console.log("eliminar colaborador", id)
     const newColaborators = colaborators.filter(
       (colaborator) => colaborator.id !== id);
     console.log(newColaborators)
@@ -121,8 +126,19 @@ function App() {
   };
 
   const createTeam = (newTeam) => {
-    console.log(newTeam)
+
    setTeams([...teams, {...newTeam,id: uuid()}])
+}
+
+const like = (id) => {
+
+  const updatedColaborators = colaborators.map((colaborator) => {
+    if(colaborator.id === id){
+      colaborator.fav = !colaborator.fav;
+    }
+    return colaborator
+  })
+  setColaborators(updatedColaborators)
 }
 
   return (
@@ -143,6 +159,7 @@ function App() {
           )}
           handleColor={handleColor}
           id={equipo.id}
+          like={like}
           />
           ))}
       <Footer />

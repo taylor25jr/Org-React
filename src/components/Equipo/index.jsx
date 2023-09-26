@@ -11,6 +11,7 @@ export const Equipo = ({
   colaborators,
   deleteColaborator,
   handleColor,
+  like,
 }) => {
  
   return (
@@ -34,6 +35,8 @@ export const Equipo = ({
                 cardColor={cardColor}
                 deleteColaborator={deleteColaborator}
                 idCol={colaborador}
+                fav={colaborador.fav}
+                like={like}
               />
             ))}
           </article>
